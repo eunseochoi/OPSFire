@@ -1,5 +1,3 @@
-This react application was built by co-op students at the Ministry of Education, to optimize time spent on checking in people during a fire drill. The coordinators are asked to check in people manually, using paper contact cards at the time of the drill. This application increases efficiency as well as accessibility for the coordinators to complete their tasks during fire drills.
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

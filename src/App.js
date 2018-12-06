@@ -13,7 +13,8 @@ class App extends Component {
 
     this.state = {
       noteText: '',
-      notes: notesArr
+      notes: notesArr,
+      isCheckedIn: ''
     }
   }
 
@@ -41,6 +42,11 @@ class App extends Component {
     }
   }
 
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked: target.value;
+  }
+
   deleteNote(index) {
     let notesArr = this.state.notes;
     notesArr.splice(index, 1);
@@ -50,20 +56,18 @@ class App extends Component {
   render() {
 
     let notes = this.state.notes.map((val, key) => {
-      return <Note key={key} text={val} deleteMethod={ () => this.deleteNote(key) } />
+      return <Note key={key} text={val} deleteMethod={ (isCheckedIn) => this.deleteNote(key) } 
+      />
     })
-
-
-
-
 
     return (
       <div className="container">
 
         <div className="header">OPS DDSBlaze</div>
+        <div className="contactList">
         { notes }
-
-        <div className = "btn" onClick={this.addNote.bind(this)}>add</div>
+        </div>
+        <div className = "btnAdd" onClick={this.addNote.bind(this)}>add</div>
 
         <input type="text"
           ref={((input) => {this.textInput = input})}
