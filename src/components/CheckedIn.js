@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import './Note.css';
+import './CheckedIn.css';
 
-class Note extends Component {
+class CheckedIn extends Component {
 
 	constructor(props) {
     super(props);
     this.state = {
-      isCheckedIn: false
     };
-     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-  }
 	render() {
 	    return (
 
-	      <div className="Note" //onClick={this.props.deleteMethod}
-	      >
+	      <div className="CheckedIn">
 	        {this.props.text}
 	         <button 
 	         	className="btnCheckIn" 
@@ -32,4 +25,4 @@ class Note extends Component {
 	  }
 }
 
-export default Note;
+export default CheckedIn;

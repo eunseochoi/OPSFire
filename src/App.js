@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import Note from './components/Note.js';
+import CheckedIn from './components/CheckedIn.js';
+import MarkedSafe from './components/MarkedSafe.js';
 import './App.css';
 class App extends Component {
 
   constructor(props) {
     super(props);
     let contacts = require('./ContactInfo.json');
-    let notesArr = [];
+    let notCheckedInArr = [];
     for(var i = 1; i < contacts.length; i++){
-      notesArr.push(contacts[i]["B"]);
+      notCheckedInArr.push(contacts[i]["B"]);
     }
 
     this.state = {
       noteText: '',
-      notes: notesArr,
-      isCheckedIn: ''
+      notCheckedIn: notCheckedInArr,
+      markedSafe: []
     }
   }
 
@@ -25,8 +26,8 @@ class App extends Component {
   addNote() {
     if (this.state.noteText === '') {return}
 
-    let notesArr = this.state.notes;
-    notesArr.push(this.state.noteText);
+    let notCheckedInArr = this.state.notCheckedIn;
+    notCheckedInArr.push(this.state.noteText);
     this.setState( { noteText: ''});
     this.textInput.focus();
 
@@ -35,46 +36,55 @@ class App extends Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      let notesArr = this.state.notes;
-      notesArr.push(this.state.noteText);
+      let notCheckedInArr = this.state.notCheckedIn;
+      notCheckedInArr.push(this.state.noteText);
       this.setState( { noteText: ''});
 
     }
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked: target.value;
-  }
-
-  deleteNote(index) {
-    let notesArr = this.state.notes;
-    notesArr.splice(index, 1);
-    this.setState({ notes: notesArr })
+  checkIn(index) {
+    let notCheckedInArr = this.state.notCheckedIn;
+    let temp = notCheckedInArr[index];
+    let markedSafeArr = [];
+    notCheckedInArr.splice(index, 1);
+    markedSafeArr.push(temp);
+    this.setState({ markedSafe: markedSafeArr })
+    alert(markedSafeArr.length);
+    this.setState({ notCheckedIn: notCheckedInArr })
+    
   }
 
   render() {
 
-    let notes = this.state.notes.map((val, key) => {
-      return <Note key={key} text={val} deleteMethod={ (isCheckedIn) => this.deleteNote(key) } 
+    let notCheckedIn = this.state.notCheckedIn.map((val, key) => {
+      return <CheckedIn key={key} text={val} deleteMethod={ (notCheckedIn, markedSafe) => this.checkIn(key) } 
       />
+    })
+
+    let safepeople = this.state.markedSafe.map((val, key) => {
+      return <MarkedSafe key={key} text={val}/>
     })
 
     return (
       <div className="container">
 
         <div className="header">OPS DDSBlaze</div>
-        <div className="contactList">
-        { notes }
+        <div className="noCheck">
+        { notCheckedIn }
         </div>
-        <div className = "btnAdd" onClick={this.addNote.bind(this)}>add</div>
 
-        <input type="text"
+        <div className="MarkedSafe">
+        { safepeople }
+        </div>
+        {/*<div className = "btnAdd" onClick={this.addNote.bind(this)}>add</div>*/}
+
+        {/*<input type="text"
           ref={((input) => {this.textInput = input})}
           className="textInput"
           value={this.state.noteText}
           onChange={noteText => this.updateNoteText(noteText)}
-          onKeyPress={this.handleKeyPress.bind(this)}/>
+          onKeyPress={this.handleKeyPress.bind(this)}/>*/}
       </div>
     );
   }
