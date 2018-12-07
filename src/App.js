@@ -45,25 +45,34 @@ class App extends Component {
 
   checkIn(index) {
     let notCheckedInArr = this.state.notCheckedIn;
+    let markedSafeArr = this.state.markedSafe;
     let temp = notCheckedInArr[index];
-    let markedSafeArr = [];
     notCheckedInArr.splice(index, 1);
     markedSafeArr.push(temp);
     this.setState({ markedSafe: markedSafeArr })
-    alert(markedSafeArr.length);
     this.setState({ notCheckedIn: notCheckedInArr })
     
+  }
+
+  undoCheckIn(index) {
+    let notCheckedInArr = this.state.notCheckedIn;
+    let markedSafeArr = this.state.markedSafe;
+    let temp = markedSafeArr[index];
+    markedSafeArr.splice(index, 1);
+    notCheckedInArr.push(temp);
+    this.setState({ markedSafe: markedSafeArr })
+    this.setState({ notCheckedIn: notCheckedInArr })
   }
 
   render() {
 
     let notCheckedIn = this.state.notCheckedIn.map((val, key) => {
-      return <CheckedIn key={key} text={val} deleteMethod={ (notCheckedIn, markedSafe) => this.checkIn(key) } 
+      return <CheckedIn key={key} text={val} deleteMethod={ (notCheckedIn) => this.checkIn(key) } 
       />
     })
 
     let safepeople = this.state.markedSafe.map((val, key) => {
-      return <MarkedSafe key={key} text={val}/>
+      return <MarkedSafe key={key} text={val} deleteMethod={ (markedSafe) => this.undoCheckIn(key) } />
     })
 
     return (
@@ -77,14 +86,6 @@ class App extends Component {
         <div className="MarkedSafe">
         { safepeople }
         </div>
-        {/*<div className = "btnAdd" onClick={this.addNote.bind(this)}>add</div>*/}
-
-        {/*<input type="text"
-          ref={((input) => {this.textInput = input})}
-          className="textInput"
-          value={this.state.noteText}
-          onChange={noteText => this.updateNoteText(noteText)}
-          onKeyPress={this.handleKeyPress.bind(this)}/>*/}
       </div>
     );
   }
