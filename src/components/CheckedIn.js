@@ -14,12 +14,20 @@ class CheckedIn extends Component {
 
 	      <div className="CheckedIn">
 	        {this.props.text}
-	         <button 
-	         	className="btnCheckIn" 
-	         	name="isCheckedIn" 
-	         	type="button" 
-	         	onClick={this.props.deleteMethod}>Check In
-	         </button>
+	        <div className="buttons">
+		         <button 
+		         	className="btnCheckIn" 
+		         	name="isCheckedIn" 
+		         	type="button"
+		         	onClick={this.props.deleteMethod}>Check In
+		         </button>
+
+		         <button
+		         	className="btnContactInfo"
+		         	name="viewContactInfo"
+		         	type="button">
+		         </button>
+		    </div>
 	      </div>
 	    );
 	  }

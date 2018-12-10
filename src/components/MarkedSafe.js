@@ -12,12 +12,19 @@ class MarkedSafe extends Component {
 	    return (
 	      <div className="MarkedSafe">
 	        {this.props.text}
+	        <div className="buttons">
 	        <button 
 	         	className="btnUndoCheckIn" 
 	         	name="UndoCheckIn" 
 	         	type="button" 
-	         	onClick={this.props.deleteMethod}>Undo
+	         	onClick={this.props.deleteMethod}>  Undo  
 	         </button>
+	         <button
+		         	className="btnContactInfo"
+		         	name="viewContactInfo"
+		         	type="button">
+		     </button>
+		     </div>
 	      </div>
 	    );
 	  }

@@ -19,16 +19,36 @@
 .MarkedSafe:hover {
   transform: scale(1.02);
 }
-.btnUndoCheckIn {
+.MarkedSafe .buttons{
+  color: white;
+  display: block;
+  float: right;
+  text-align: center;
+  align-items: center;
+  text-decoration: none;
+}
+.MarkedSafe .buttons .btnUndoCheckIn {
   background-color: #e83c3c; /* Red */
   border: none;
   color: white;
   float: right;
-  padding: 15px 32px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 125px;
   border-radius: 4px;
   text-align: center;
   align-items: center;
   text-decoration: none;
   display: block;
   font-size: 60%;
+}
+.MarkedSafe .buttons .btnContactInfo {
+  cursor:pointer;
+  border:none;
+  width:25px;
+  height:25px;
+  vertical-align: center;
+  background: url(info_icon.png) no-repeat;
+  background-position: center;
+  margin-right: 18px;
 }
