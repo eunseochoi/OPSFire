@@ -13,9 +13,10 @@ class App extends Component {
     }
 
     this.state = {
-      noteText: '',
       notCheckedIn: notCheckedInArr,
-      markedSafe: []
+      markedSafe: [],
+      filtered: [],
+      search: ''
     }
   }
 
@@ -64,28 +65,36 @@ class App extends Component {
     this.setState({ notCheckedIn: notCheckedInArr })
   }
 
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)});
+
+  }
+
   render() {
 
     let notCheckedIn = this.state.notCheckedIn.map((val, key) => {
       return <CheckedIn key={key} text={val} deleteMethod={ (notCheckedIn) => this.checkIn(key) } 
       />
     })
+    notCheckedIn.sort();
 
     let safepeople = this.state.markedSafe.map((val, key) => {
       return <MarkedSafe key={key} text={val} deleteMethod={ (markedSafe) => this.undoCheckIn(key) } />
     })
+    safepeople.sort();
 
+    let totalList = notCheckedIn.concat(safepeople);
     return (
       <div className="container">
-
-        <div className="header">OPS DDSBlaze</div>
-        <div className="noCheck">
-        { notCheckedIn }
-        </div>
-
-        <div className="MarkedSafe">
-        { safepeople }
-        </div>
+          <input type="text" className="searchBar" onChange={this.updateSearch.bind(this)} placeholder="Search" value={this.state.search} />
+            <h2 className="Title">Not Checked-In</h2>
+              <div className="noCheck">
+              { notCheckedIn }
+              </div>
+              <h2 className="Title">Checked-In</h2>
+              <div className="markedSafe">
+              { safepeople }
+              </div>
       </div>
     );
   }
