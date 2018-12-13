@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import './CheckedIn.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 class CheckedIn extends Component {
 

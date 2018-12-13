@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import CheckedIn from './components/CheckedIn.js';
 import MarkedSafe from './components/MarkedSafe.js';
+import ContactCard from './ContactCard.js';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import './App.css';
 class App extends Component {
 
@@ -16,7 +24,8 @@ class App extends Component {
       notCheckedIn: notCheckedInArr,
       markedSafe: [],
       filtered: [],
-      search: ''
+      search: '',
+      emergContacts: ContactCard
     }
   }
 
@@ -76,12 +85,10 @@ class App extends Component {
       return <CheckedIn key={key} text={val} deleteMethod={ (notCheckedIn) => this.checkIn(key) } 
       />
     })
-    notCheckedIn.sort();
 
     let safepeople = this.state.markedSafe.map((val, key) => {
       return <MarkedSafe key={key} text={val} deleteMethod={ (markedSafe) => this.undoCheckIn(key) } />
     })
-    safepeople.sort();
 
     let totalList = notCheckedIn.concat(safepeople);
     return (

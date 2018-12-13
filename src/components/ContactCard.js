@@ -5,25 +5,32 @@ class ContactCard extends Component {
 
 	constructor(props) {
     super(props);
-    let contacts = require('./ContactInfo.json');
-    let emergContact = new dict();
-    for(var i = 1; i < contacts.length; i++){
-    	emergContact["Name"][i-1] = contacts["B"][i];
-    	emergContact["Phone Number"][i-1] = contacts["C"][i];
-    	emergContact["email"][i-1] = contacts["D"][i];
+    let contacts = require('../ContactInfo.json');
+    let emergContact = {
+        "Name": [],
+        "PhoneNumber": [],
+        "email": []
+    };
+    for(var i = 0; i < contacts.length; i++){
+    	emergContact["Name"][i] = contacts[i]["B"];
+    	emergContact["PhoneNumber"][i] = contacts[i]["C"];
+    	emergContact["email"][i] = contacts[i]["D"];
     }
     this.state = {
     	employee: emergContact
     };
-  }
+}
+    
 
 	render() {
+        let contactInformation = this.state.employee;
 	    return (
 
+
 	      <div className="ContactCard">
-	        {this.props.text}
-	        <div className="button">
-		    </div>
+          <h2>{this.props.text}</h2>
+          <h2>{contactInformation.PhoneNumber[keyindex]}</h2>
+          <h2>{contactInformation.email[keyindex]}</h2>
 	      </div>
 	    );
 	  }
